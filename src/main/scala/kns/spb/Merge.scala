@@ -7,13 +7,6 @@ package kns.spb
 import scala.annotation.tailrec
 import scala.math.Ordering
 
-/** Divide list in 2 then sort each half, recursively
-  *
-  * implicitly uses math.Ordering
-  *
-  * @author Scala translation by Gary Struthers from Java by Robert Sedgewick and Kevin Wayne.
-  *
-  */
 object Merge {
 
   /** Recursive mergesort
