@@ -4,6 +4,13 @@ import scala.collection.mutable
 
 object Graham {
 
+  def findShell(points : Array[Point]): Seq[Point] = {
+    setLeftmostPointFirst(points)
+    findShellInSorted(
+      points(0),
+      sortByRotation(points(0), points.slice(1, points.length)))
+  }
+
   def setLeftmostPointFirst(points : Array[Point]): Unit = {
     for (i <- points.indices) {
       if (points(i).x < points(0).x) {
@@ -25,7 +32,6 @@ object Graham {
 
   def findShellInSorted(pointFromShell : Point, points : Array[Point]): Seq[Point] = {
     val shell = mutable.ArrayBuffer(pointFromShell, points(0))
-    System.err.println(shell)
     for (i <- 1 until points.length) {
       while (rotate(shell(shell.length - 2), shell.last, points(i)) < 0) {
         shell.remove(shell.length - 1)
