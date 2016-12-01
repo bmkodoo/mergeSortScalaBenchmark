@@ -1,5 +1,7 @@
 package kns.spb.mvo
 
+import scala.collection.mutable
+
 object Graham {
 
   def setLeftmostPointFirst(points : Array[Point]): Unit = {
@@ -19,5 +21,18 @@ object Graham {
 
   def sortByRotation(centerPoint : Point, points : Array[Point]): Array[Point] = {
     points.sortWith((a, b) => rotate(centerPoint, a, b) > 0)
+  }
+
+  def findShellInSorted(pointFromShell : Point, points : Array[Point]): Seq[Point] = {
+    val shell = mutable.ArrayBuffer(pointFromShell, points(0))
+    System.err.println(shell)
+    for (i <- 1 until points.length) {
+      while (rotate(shell(shell.length - 2), shell.last, points(i)) < 0) {
+        shell.remove(shell.length - 1)
+      }
+      shell += points(i)
+    }
+
+    shell
   }
 }
