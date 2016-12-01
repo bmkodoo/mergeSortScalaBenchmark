@@ -5,7 +5,6 @@ import java.util.concurrent.TimeUnit
 import kns.spb.Merge
 import org.openjdk.jmh.annotations.{State, _}
 
-/* Default settings for benchmarks in this class */
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 @BenchmarkMode(Array(Mode.AverageTime))
 @State(Scope.Thread)
