@@ -2,17 +2,22 @@ package kns.spb.mvo
 
 object Graham {
 
-  def setLeftmostPointFirst(points : Array[Point]) : Array[Int] = {
-    val pointsOrder = points.indices.toArray
+  def setLeftmostPointFirst(points : Array[Point]): Unit = {
     for (i <- points.indices) {
-      if (points(pointsOrder(i)).x < points(pointsOrder(0)).x) {
-        //если P[i]-ая точка лежит левее P[0]-ой точки
+      if (points(i).x < points(0).x) {
+        //если i-ая точка лежит левее 0-ой точки
         //меняем местами номера этих точек
-        val prevFirst = pointsOrder(0)
-        pointsOrder(0) = pointsOrder(i)
-        pointsOrder(i) = prevFirst
+        val prevFirst = points(0)
+        points(0) = points(i)
+        points(i) = prevFirst
       }
     }
-    pointsOrder
+  }
+
+  def rotate(a : Point, b : Point, c : Point) =
+    (b.x - a.x) * (c.y - b.y) - (b.y - a.y) * (c.x - b.x)
+
+  def sortByRotation(centerPoint : Point, points : Array[Point]): Array[Point] = {
+    points.sortWith((a, b) => rotate(centerPoint, a, b) > 0)
   }
 }
